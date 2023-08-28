@@ -4,7 +4,7 @@ import os
 import numpy as np
 import pandas as pd
 import re
-from style_clip import image_generator, 
+from style_clip import image_generator 
 
 # from dataset_select import dataset_select
 # from generator import image_generator
