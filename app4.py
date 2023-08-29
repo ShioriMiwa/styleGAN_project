@@ -1,12 +1,12 @@
 import streamlit as st
 from PIL import Image
 import os
-import numpy as np
-import pandas as pd
+#import numpy as np
+#import pandas as pd
 import re
 from style_clip import style_clip, image_generator, save_image
 from main import main
-from google.cloud import storage
+#from google.cloud import storage
 
 # from dataset_select import dataset_select
 # from generator import image_generator
@@ -26,7 +26,7 @@ from google.cloud import storage
 ##########################################################################################################################
 # original_path = 'gs://raw-data-align-celeba/styleGAN_project/img_align_celeba/000019.jpg'
 # #output_path = '/Users/lucaskawasaki/Desktop/Project/replicate/generated/'
-# output_path = './'
+output_path = './'
 ##########################################################################################################################
 
 
