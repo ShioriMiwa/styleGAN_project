@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import text2image.preprocess
 import shutil
 import os
+import random
 
 '''This code load the dataset and convert the attributes matrix 
 to a matrix of image id and vectorized texts
@@ -92,7 +93,9 @@ def show_pics(df_new, index_highsimilarity):
     shutil.rmtree(path_save)
     os.mkdir(path_save)
 
-    for i in range(5): # change the top N 
+    list_img = []
+
+    for i in range(10): # select 1 photo randomly from the top N 
         print(i)
         img_filename = df_new.iloc[index_highsimilarity[i]].image_id
         filename = path + img_filename
@@ -102,6 +105,15 @@ def show_pics(df_new, index_highsimilarity):
         plt.imshow(img)
         img.save(f"{path_save}matched_{img_filename}.png", format='PNG')
         plt.show()
+        list_img.append(filename) # append filename to the list
+    
+    print("-----------random choice----------")
+    filename = random.choice(list_img)
+    img = Image.open(filename)
+    plt.figure(figsize=(4,4))
+    plt.imshow(img)
+    plt.show()
+    print(f"randomly picked {filename}")
     return filename
 
 def call_vocaburary_dict():
