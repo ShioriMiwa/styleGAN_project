@@ -68,7 +68,6 @@ def click_download_button():
 
 def click_accept_button():
     st.session_state.image2.save('0.0.jpg')
-    st.session_state.images_in_folder
     for img in st.session_state.images_in_folder:
         if img != '0.0':
             os.remove(f'{img}.jpg')
@@ -144,21 +143,20 @@ def main2():
             # client = storage.Client()
             # bucket = client.get_bucket(bucket_name)
             # blob = bucket.blob(path)
-            # st.session_state.original_image = '0.0.jpg'
+            st.session_state.original_image = '0.0.jpg'
             # blob.download_to_filename(st.session_state.original_image)
 
-            #st.session_state.original_test = main(text_input1)
-            st.session_state.original_test = main(text_input1)
-            #print(st.session_state.original_test)
-
-            output = image_generator(image=st.session_state.original_test, target='hair', manipulation=0.0)
+            original_test = main(text_input1)
+            output = image_generator(image=original_test, target='hair', manipulation=0.0)
             st.session_state.output_image = save_image(link=output, manipulation=0.0)
-
+            #image_original = Image.open(st.session_state.output_image)
+            #image_original.save(st.session_state.original_image)
             # Original image
             #############################################################
         try:
             with col1:
                 image1 = Image.open('0.0.jpg') # return from previous part
+                #image1 = Image.open('0.0.jpg') # return from previous part
                 disabled=st.session_state
                 st.image(image1, use_column_width=True)
         except:
@@ -166,19 +164,19 @@ def main2():
 
         if text_input1 and text_input2 and st.session_state.generate_clicked:
             # Call style_clip and web_load_images
-            manipulation_strength = [-4.5, 4.5]
-            style_clip(original_image_path=st.session_state.original_test, target=text_input2, manipulation_strength=manipulation_strength)
+            manipulation_strength = [3.0, 4.5]
+            style_clip(original_image_path=st.session_state.original_image, target=text_input2, manipulation_strength=manipulation_strength)
 
         # Sidebar part 2
         #############################################################
 
         st.session_state.images_in_folder = catch_images_name(output_path)
-        if len(st.session_state.images_in_folder) > 1:
+        if len(st.session_state.images_in_folder) > 2:
             with st.sidebar:
                 color = st.select_slider(
                     'Select the level of change',
                     options=st.session_state.images_in_folder,
-                    value=('0.0')
+                    value=('4.5')
                 )
             # Generated image
             #############################################################
@@ -195,8 +193,9 @@ def main2():
             with col4: st.write('')
             with col5: st.write('')
             with col6:
-                st.button('Download', on_click=click_download_button)
-                # Download image
+                with open(f'{output_path}{color}.jpg', "rb") as file:
+                    st.download_button(label="Download", data=file,
+                                       file_name="download_image.png", mime="image/png")
             with col7:
                 st.button('Accept', on_click=click_accept_button)
             with col8: st.write('')
