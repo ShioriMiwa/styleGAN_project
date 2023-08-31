@@ -10,13 +10,8 @@ import numpy as np
 # Check project on GCP
 # gcloud projects list
 
-
-# stylegan-project-396702-74a628ba4c56.json
-
-#os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = 'stylegan-project-396702-74a628ba4c56.json'
 # Export to env before start
-# export REPLICATE_API_TOKEN=r8_6cSSmxOsUcAttQtHasyyBagsKseY4WS2P2NCd
-
+# export REPLICATE_API_TOKEN="r8_OUL8yz2IUaDjewlOtVB11VUxNfZay6s3CMKx6"
 
 
 # Paths - Change to GCP
@@ -46,7 +41,7 @@ output_path = '/Users/lucaskawasaki/Desktop/Project/replicate/generated/'
 def image_generator(image, target, manipulation):
     output = replicate.run('orpatashnik/styleclip:7af9a66f36f97fee2fece7dcc927551a951f0022cbdd23747b9212f23fc17021',
                            input={'input': open(image, "rb"), # user input
-                                  'neutral': 'a face', # default
+                                  'neutral': 'a happy face', # default
                                   'target': target, # user input
                                   'manipulation_strength': manipulation, # manipulation_strength
                                   'disentanglement_threshold': 0.15 # default
