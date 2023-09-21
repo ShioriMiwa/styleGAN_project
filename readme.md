@@ -1,4 +1,4 @@
-### Readme last update 2023.Sep.6
+### Readme last update 2023.Sep.21
 # Documentation of App "AIdentikit" 
 ## The app can generate face images from text inputs describing the face features.
 
